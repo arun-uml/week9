@@ -20,9 +20,6 @@ podTemplate(yaml: '''
 			  sh '''
 			  pwd
 			  cd Chapter08/sample1
-			  kubectl apply -f calculator.yaml -n staging
-			  kubectl apply -f hazelcast.yaml -n staging
-			  sleep 30
 			  curl -ik -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/staging/deployments -XPOST -H "Content-type: application/yaml" --data-binary @hazelcast.yaml
 			  curl -ik -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/staging/deployments -XPOST -H "Content-type: application/yaml" --data-binary @calculator.yaml
 			  '''
